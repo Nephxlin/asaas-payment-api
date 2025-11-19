@@ -24,11 +24,18 @@ app.get('/debug/env', (req: Request, res: Response) => {
     PORT: env.PORT,
     HAS_DATABASE_URL: !!env.DATABASE_URL,
     DATABASE_URL_PREFIX: env.DATABASE_URL?.substring(0, 20) + '...',
+    // Verificar ASAAS_API_KEY
     HAS_ASAAS_API_KEY: !!env.ASAAS_API_KEY,
     ASAAS_API_KEY_LENGTH: env.ASAAS_API_KEY?.length || 0,
     ASAAS_API_KEY_PREFIX: env.ASAAS_API_KEY?.substring(0, 20) + '...',
+    // Debug raw env vars
+    RAW_ASAAS_API_KEY: !!process.env.ASAAS_API_KEY,
+    RAW_API_KEY: !!process.env.API_KEY,
+    // PIX Key
     HAS_ASAAS_PIX_KEY: !!env.ASAAS_PIX_KEY,
-    ASAAS_PIX_KEY_VALUE: env.ASAAS_PIX_KEY
+    ASAAS_PIX_KEY_VALUE: env.ASAAS_PIX_KEY,
+    // Todas as env vars disponíveis (apenas os nomes)
+    ALL_ENV_KEYS: Object.keys(process.env).filter(k => k.includes('ASAAS') || k.includes('API'))
   });
 });
 
