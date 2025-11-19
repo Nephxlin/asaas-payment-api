@@ -7,7 +7,10 @@ import { GenerateQRRequest, GenerateQRResponse, VerifyPaymentResponse } from '..
 export class PaymentController {
   async generateQR(req: Request, res: Response): Promise<void> {
     try {
-      const { userId, amount, externalId, description }: GenerateQRRequest = req.body;
+      const { userId: userIdRaw, amount, externalId, description }: GenerateQRRequest = req.body;
+
+      // Converter userId para número
+      const userId = typeof userIdRaw === 'string' ? parseInt(userIdRaw, 10) : userIdRaw;
 
       console.log('═══════════════════════════════════════════════════');
       console.log('🔄 GERANDO QR CODE PIX');
@@ -20,6 +23,14 @@ export class PaymentController {
         res.status(400).json({
           success: false,
           error: 'Campos obrigatórios: userId, amount, externalId'
+        });
+        return;
+      }
+
+      if (isNaN(userId)) {
+        res.status(400).json({
+          success: false,
+          error: 'userId deve ser um número válido'
         });
         return;
       }

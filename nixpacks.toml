@@ -1,0 +1,22 @@
+# Configuração Nixpacks para Coolify
+[phases.setup]
+nixPkgs = ["nodejs_18", "yarn"]
+
+[phases.install]
+cmds = [
+  "yarn install --frozen-lockfile --production=false"
+]
+
+[phases.build]
+cmds = [
+  "npx prisma generate",
+  "yarn build",
+  "yarn install --frozen-lockfile --production=true"
+]
+
+[start]
+cmd = "sh -c 'npx prisma migrate deploy && node dist/server.js'"
+
+[variables]
+NODE_ENV = "production"
+
