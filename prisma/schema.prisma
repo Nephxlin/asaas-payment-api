@@ -1,0 +1,49 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Transaction {
+  id                    String    @id @default(uuid())
+  userId                Int
+  externalId            String    @unique
+  asaasQrCodeId         String?   @unique
+  asaasTransactionId    String?
+  amount                Decimal   @db.Decimal(10, 2)
+  description           String?
+  status                String    @default("pending")
+  qrCodePayload         String?   @db.Text
+  qrCodeEncodedImage    String?   @db.Text
+  expirationSeconds     Int       @default(300)
+  
+  qrCodeResponse        Json?
+  transactionData       Json?
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  paidAt                DateTime?
+  
+  @@index([userId])
+  @@index([externalId])
+  @@index([asaasQrCodeId])
+  @@index([status])
+  @@map("transactions")
+}
+
+model WebhookLog {
+  id          String    @id @default(uuid())
+  eventType   String?
+  payload     Json
+  processed   Boolean   @default(false)
+  error       String?
+  createdAt   DateTime  @default(now())
+  
+  @@index([processed])
+  @@index([createdAt])
+  @@map("webhook_logs")
+}
+
