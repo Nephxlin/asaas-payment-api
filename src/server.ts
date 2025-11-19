@@ -19,22 +19,31 @@ app.get('/health', (req: Request, res: Response) => {
 
 // Debug endpoint - verificar variáveis de ambiente
 app.get('/debug/env', (req: Request, res: Response) => {
+  const rawApiKey = process.env.ASAAS_API_KEY;
+  const rawApiKeyType = typeof rawApiKey;
+  const rawApiKeyValue = rawApiKey === undefined ? 'UNDEFINED' : (rawApiKey === null ? 'NULL' : (rawApiKey === '' ? 'EMPTY_STRING' : rawApiKey));
+  
   res.json({
     NODE_ENV: env.NODE_ENV,
     PORT: env.PORT,
     HAS_DATABASE_URL: !!env.DATABASE_URL,
     DATABASE_URL_PREFIX: env.DATABASE_URL?.substring(0, 20) + '...',
-    // Verificar ASAAS_API_KEY
+    // Verificar ASAAS_API_KEY com MUITO detalhe
     HAS_ASAAS_API_KEY: !!env.ASAAS_API_KEY,
     ASAAS_API_KEY_LENGTH: env.ASAAS_API_KEY?.length || 0,
     ASAAS_API_KEY_PREFIX: env.ASAAS_API_KEY?.substring(0, 20) + '...',
-    // Debug raw env vars
-    RAW_ASAAS_API_KEY: !!process.env.ASAAS_API_KEY,
-    RAW_API_KEY: !!process.env.API_KEY,
-    // PIX Key
+    // Debug SUPER detalhado
+    RAW_ASAAS_API_KEY_EXISTS: 'ASAAS_API_KEY' in process.env,
+    RAW_ASAAS_API_KEY_TYPE: rawApiKeyType,
+    RAW_ASAAS_API_KEY_IS_TRUTHY: !!rawApiKey,
+    RAW_ASAAS_API_KEY_VALUE: rawApiKeyValue,
+    RAW_ASAAS_API_KEY_LENGTH: rawApiKey?.length || 0,
+    RAW_ASAAS_API_KEY_FIRST_20: rawApiKey?.substring(0, 20) || 'N/A',
+    // PIX Key (que funciona)
     HAS_ASAAS_PIX_KEY: !!env.ASAAS_PIX_KEY,
     ASAAS_PIX_KEY_VALUE: env.ASAAS_PIX_KEY,
-    // Todas as env vars disponíveis (apenas os nomes)
+    RAW_PIX_KEY_LENGTH: process.env.ASAAS_PIX_KEY?.length || 0,
+    // Todas as env vars disponíveis
     ALL_ENV_KEYS: Object.keys(process.env).filter(k => k.includes('ASAAS') || k.includes('API'))
   });
 });
