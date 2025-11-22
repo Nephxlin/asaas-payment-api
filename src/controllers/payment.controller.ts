@@ -76,7 +76,7 @@ export class PaymentController {
       console.log('🔄 Criando QR Code no Asaas...');
 
       const qrCodeResponse = await asaasService.createStaticQRCode(
-        '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0',
+        '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjMyNWEzMDc2LTBiMjMtNGQ2YS1hNDNmLTAxOTA2Yjk4YzUzMzo6JGFhY2hfYTY3NzNkYWItZTQ0Ni00YmY2LThmYWItYzBhYTgzNmM0ZmIz',
         qrCodeData
       );
 
@@ -222,7 +222,7 @@ export class PaymentController {
         console.log('ConciliationIdentifier:', transaction.asaasQrCodeId);
 
         const pixTransactions = await asaasService.getPixTransactions(
-          '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0',
+          '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjMyNWEzMDc2LTBiMjMtNGQ2YS1hNDNmLTAxOTA2Yjk4YzUzMzo6JGFhY2hfYTY3NzNkYWItZTQ0Ni00YmY2LThmYWItYzBhYTgzNmM0ZmIz',
           transaction.asaasQrCodeId
         );
 

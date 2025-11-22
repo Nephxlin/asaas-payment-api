@@ -1,0 +1,85 @@
+# ===================================================
+# VARIÁVEIS DE AMBIENTE PARA COOLIFY
+# ===================================================
+# Copie e cole cada variável no painel do Coolify
+# Settings → Environment Variables → Add Variable
+#
+# IMPORTANTE: 
+# - Marque apenas "Runtime" (IS_RUNTIME = true)
+# - Desmarque "Buildtime" (IS_BUILD = false)
+# ===================================================
+
+# Node.js Environment
+NODE_ENV=production
+
+# Server Port
+PORT=3000
+
+# PostgreSQL Database (URL do Coolify)
+DATABASE_URL=postgres://postgres:zFD7fcBKgsBstoXX1L14llwbBABccUmEBJRpOp5r8ZQILDAGY2sHrnGFeAV7n1ls@h4wggcc4c08koswgwswsok0w:5432/postgres
+
+# Asaas API Configuration
+# ATENÇÃO: Se o Coolify não aceitar o $ no início, 
+# tente uma das alternativas abaixo:
+#
+# Opção 1: Com aspas simples
+ASAAS_API_KEY='$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0'
+#
+# Opção 2: Com barra invertida
+# ASAAS_API_KEY=\$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0
+#
+# Opção 3: Sem o $ no início (vamos adicionar via código)
+# ASAAS_API_KEY=aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0
+
+# Asaas PIX Key
+ASAAS_PIX_KEY=58518729-85e2-485e-b261-cfd74dae9e56
+
+# ===================================================
+# INSTRUÇÕES PARA ADICIONAR NO COOLIFY:
+# ===================================================
+#
+# 1. Acesse seu projeto no Coolify
+# 2. Vá em "Environment" ou "Variables"
+# 3. Para cada variável acima:
+#    
+#    a) Clique em "Add Variable" ou "New Variable"
+#    
+#    b) Preencha:
+#       Name: [nome da variável, ex: NODE_ENV]
+#       Value: [valor da variável]
+#    
+#    c) Configuração:
+#       ☑ Is Runtime Variable (MARCAR)
+#       ☐ Is Build Variable (DESMARCAR)
+#    
+#    d) Clique em "Save" ou "Add"
+#
+# 4. Depois de adicionar TODAS as variáveis:
+#    - Clique em "Restart" (não precisa Redeploy)
+#    - Aguarde 10-20 segundos
+#
+# 5. Teste:
+#    curl http://seu-dominio/debug/env
+#    
+#    Deve mostrar:
+#    "HAS_ASAAS_API_KEY": true
+#    "ASAAS_API_KEY_LENGTH": 180
+#
+# ===================================================
+# SOLUÇÃO ALTERNATIVA: SE NÃO FUNCIONAR
+# ===================================================
+#
+# Se o Coolify continuar rejeitando a ASAAS_API_KEY,
+# adicione DUAS variáveis para testar:
+#
+# Variável 1:
+# Name:  ASAAS_API_KEY
+# Value: aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0
+# (SEM o $ no início)
+#
+# Variável 2 (backup):
+# Name:  API_KEY
+# Value: $aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjNiMzg5N2ExLTYzYmEtNGZhYi04M2EyLTRkNjI0Y2NiNzRkYzo6JGFhY2hfNzcwMDc3NzQtN2JlOC00OWZmLWExMzYtMGE0OWQ4YzkyNjI0
+#
+# ===================================================
+
